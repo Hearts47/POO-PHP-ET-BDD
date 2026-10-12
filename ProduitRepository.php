@@ -52,7 +52,6 @@ class ProduitRepository
     {
         $sql = "SELECT id, nom, prix, stock FROM produit WHERE nom LIKE :recherche";
         $stmt = $this->pdo->prepare($sql);
-
         $stmt->execute(["recherche" => "%" . $recherche . "%"]);
 
         $produits = [];
@@ -62,5 +61,20 @@ class ProduitRepository
         }
 
         return $produits;
+    }
+
+    public function insert(Produit $produit): void
+    {
+        $sql = "INSERT INTO produit(nom, prix, stock)
+                VALUES (:nom, :prix, :stock)";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute([
+            "nom" => $produit->getNom(),
+            "prix" => $produit->getPrix(),
+            "stock" => $produit->getStock()
+        ]);
+
+        $produit->setId((int) $this->pdo->lastInsertId());
     }
 }

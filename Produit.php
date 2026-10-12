@@ -20,6 +20,12 @@ class Produit
         return $this->id;
     }
 
+    // Permet d'affecter l'id généré par MySQL après l'insertion
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
     public function getNom(): string
     {
         return $this->nom;
