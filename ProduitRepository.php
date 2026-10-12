@@ -47,4 +47,20 @@ class ProduitRepository
 
         return $produits;
     }
+
+    public function findByNom(string $recherche): array
+    {
+        $sql = "SELECT id, nom, prix, stock FROM produit WHERE nom LIKE :recherche";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute(["recherche" => "%" . $recherche . "%"]);
+
+        $produits = [];
+
+        while ($ligne = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $produits[] = $this->hydrater($ligne);
+        }
+
+        return $produits;
+    }
 }
