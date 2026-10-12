@@ -10,15 +10,17 @@ class Produit
     public function __construct(?int $id, string $nom, float $prix, int $stock)
     {
         $this->id = $id;
-        $this->nom = $nom;
-        $this->prix = $prix;
-        $this->stock = $stock;
+
+        $this->setNom($nom);
+        $this->setPrix($prix);
+        $this->setStock($stock);
     }
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
     public function setId(int $id): void
     {
         $this->id = $id;

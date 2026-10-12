@@ -8,7 +8,6 @@ class ProduitRepository
     {
         $this->pdo = $pdo;
     }
-
     private function hydrater(array $ligne): Produit
     {
         return new Produit(
@@ -93,5 +92,12 @@ class ProduitRepository
             "stock" => $produit->getStock(),
             "id" => $produit->getId()
         ]);
+    }
+
+    public function delete(int $id): void
+    {
+        $sql = "DELETE FROM produit WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(["id" => $id]);
     }
 }
