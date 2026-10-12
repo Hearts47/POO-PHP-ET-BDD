@@ -15,3 +15,4 @@ $produit = new Produit(
 
 $produit->afficher();
 
+// Le fait de remplir un objet avec des données provenant d'une base de données s'appelle la méthode hydrate
