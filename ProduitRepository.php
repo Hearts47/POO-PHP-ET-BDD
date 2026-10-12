@@ -8,6 +8,7 @@ class ProduitRepository
     {
         $this->pdo = $pdo;
     }
+
     private function hydrater(array $ligne): Produit
     {
         return new Produit(
