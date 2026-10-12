@@ -77,4 +77,21 @@ class ProduitRepository
 
         $produit->setId((int) $this->pdo->lastInsertId());
     }
+
+    public function update(Produit $produit): void
+    {
+        $sql = "UPDATE produit
+                SET nom = :nom,
+                    prix = :prix,
+                    stock = :stock
+                WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute([
+            "nom" => $produit->getNom(),
+            "prix" => $produit->getPrix(),
+            "stock" => $produit->getStock(),
+            "id" => $produit->getId()
+        ]);
+    }
 }
